@@ -6,9 +6,9 @@ import {navlinks} from "../../data/data.js"
 
 export const MyNav = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className='bg-primary'>
       <Container fluid>
-        <Navbar.Brand href="#home">Epibooks</Navbar.Brand>
+        <Navbar.Brand href="#home" className='text-white'>Epibooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
