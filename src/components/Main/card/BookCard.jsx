@@ -1,28 +1,34 @@
-import { Col } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import { useState } from "react"
 import "./bookcard.css"
+import { CommentArea } from "../comments/CommentArea"
 
-export const BookCard = ({ title, img, price, category }) => {
-    const [selected, setSelected] = useState(false)
+export const BookCard = ({ title, img, price, category, asin }) => {
+    const [isSelected, setIsSelected] = useState(false)
 
     return (
-        <Col xs={12} md={4} lg={3}>
-            <div
-                className={`book-card h-100 ${selected ? "card-selected" : ""}`}
-                onClick={() => setSelected(!selected)}
-            >
-                <div
-                    className="image-wrapper h-100"
+        <Col sm md={isSelected ? 12 : 4} lg={isSelected ? 12 : 3}>
+            <Row className="h-100">
+                <Col>
+                    <div
+                        className={`book-card h-100 ${isSelected ? "card-selected" : ""}`}
+                        onClick={() => setIsSelected(!isSelected)}
+                    >
+                        <div
+                            className="image-wrapper h-100"
 
-                >
-                    <img src={img} alt={title} className="position-relative h-100 w-100 object-fit-cover" />
-                </div>
-                <div className="book-overlay">
-                    <h6 className="fs-4">{title}</h6>
-                    <p>{category}</p>
-                    <p>{`${price} €`}</p>
-                </div>
-            </div>
+                        >
+                            <img src={img} alt={title} className="position-relative h-100 w-100 object-fit-cover" />
+                        </div>
+                        <div className="book-overlay">
+                            <h6 className="fs-4">{title}</h6>
+                            <p>{category}</p>
+                            <p>{`${price} €`}</p>
+                        </div>
+                    </div>
+                </Col>
+                {isSelected && <CommentArea asin={asin}/>}
+            </Row>
         </Col>
     )
 }

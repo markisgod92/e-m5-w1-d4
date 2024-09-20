@@ -105,6 +105,7 @@ export const Main = () => {
                                 img={book.img}
                                 price={book.price}
                                 category={book.category}
+                                asin={book.asin}
                             />
                         ))
                             : <p>Non ci sono libri.</p>
