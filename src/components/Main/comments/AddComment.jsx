@@ -2,16 +2,18 @@ import { Col, Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import ReactStars from "react-rating-stars-component";
 
-export const AddComment = ({ asin }) => {
+export const AddComment = ({ asin, reloadFunction }) => {
     const API_AUTHORIZATION = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8"
 
-    const [userComment, setUserComment] = useState({
+    const defaultState = {
         comment: "",
         rate: 0,
         elementId: `${asin}`
-    })
+    }
 
-    console.log(userComment)
+    const [userComment, setUserComment] = useState(defaultState)
+
+    const [formAlert, setFormAlert] = useState("")
 
     const handleInputChange = (e) => {
         setUserComment({
@@ -26,7 +28,11 @@ export const AddComment = ({ asin }) => {
 
     const postComment = async (e) => {
         e.preventDefault()
-        if (!validateComment()) return;
+
+        if (!validateComment()) {
+            setFormAlert("Campi non validi.")
+            return
+        }
 
         try {
             const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments`, {
@@ -38,9 +44,13 @@ export const AddComment = ({ asin }) => {
                 body: JSON.stringify(userComment)
             })
             const data = await response.json()
-            console.log(data)
+            setFormAlert("Commento inviato.")
         } catch (e) {
             console.error(e)
+            setFormAlert(e)
+        } finally {
+            reloadFunction()
+            setUserComment(defaultState)
         }
     }
 
@@ -52,21 +62,7 @@ export const AddComment = ({ asin }) => {
                 <Form
                     onSubmit={(e) => postComment(e)}
                 >
-                    {/* <Form.Select
-                        className='mb-3'
-                        name="rate"
-                        id="rate"
-                        value={userComment.rate || ""}
-                        onChange={(e) => handleInputChange(e)}
-                    >
-                        <option value="">Rating</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </Form.Select> */}
-                    <ReactStars 
+                    <ReactStars
                         count={5}
                         size={24}
                         isHalf={false}
@@ -76,15 +72,18 @@ export const AddComment = ({ asin }) => {
                             rate: newRating
                         }))}
                     />
-                    <Form.Group className='mb-3'>
-                        <Form.Label>Commento</Form.Label>
-                        <Form.Control
-                            type='textarea'
-                            placeholder='Lascia un commento...'
-                            name='comment'
-                            value={userComment.comment}
-                            onChange={(e) => handleInputChange(e)} />
-                    </Form.Group>
+                    <Form.Control
+                        className='my-4'
+                        as='textarea'
+                        rows={4}
+                        placeholder='Lascia un commento...'
+                        name='comment'
+                        value={userComment.comment}
+                        onChange={(e) => handleInputChange(e)} 
+                    />
+                    {formAlert && (
+                        <div className='text-danger my-3'>{formAlert}</div>
+                    )}
                     <Button variant='primary' type='Submit'>Invia</Button>
                 </Form>
             </div>

@@ -16,8 +16,6 @@ export const Main = () => {
     const [books, setBooks] = useState([])
     const [searchInput, setSearchInput] = useState("")
 
-    console.log(searchInput)
-
     const getAllBooks = () => {
         const allBooks = [
             ...fantasyBooks.slice(0, 5),

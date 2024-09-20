@@ -27,7 +27,13 @@ export const BookCard = ({ title, img, price, category, asin }) => {
                         </div>
                     </div>
                 </Col>
-                {isSelected && <CommentArea asin={asin}/>}
+                {isSelected && (
+                    <CommentArea
+                        asin={asin}
+                        title={title}
+                        deselectFunction={() => setIsSelected(false)}
+                    />
+                )}
             </Row>
         </Col>
     )

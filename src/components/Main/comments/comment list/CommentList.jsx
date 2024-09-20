@@ -1,7 +1,11 @@
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { SingleComment } from './SingleComment';
 
-export const CommentList = ({ comments }) => {
+export const CommentList = ({ comments, deleteFunction }) => {
+   
+    
+
+
     return (
         <Col sm md={6}>
             <div className='d-flex flex-column overflow-scroll'>
@@ -15,6 +19,7 @@ export const CommentList = ({ comments }) => {
                                 author={comment.author}
                                 rate={comment.rate}
                                 comment={comment.comment}
+                                deleteFunction={() => deleteFunction(comment._id)}
                             />
                         ))
                     ) : (
@@ -22,7 +27,6 @@ export const CommentList = ({ comments }) => {
                     )}
                 </div>
             </div>
-
         </Col>
     )
 }
