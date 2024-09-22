@@ -15,6 +15,7 @@ import scifiBooks from '../../assets/books/scifi.json'
 export const Main = () => {
     const [books, setBooks] = useState([])
     const [searchInput, setSearchInput] = useState('')
+    const [selectedCard, setSelectedCard] = useState(null)
 
     const getAllBooks = () => {
         const allBooks = [
@@ -58,6 +59,10 @@ export const Main = () => {
             default:
                 setBooks([])
         }
+    }
+
+    const highlightCard = (id) => {
+        setSelectedCard(id)
     }
 
     useEffect(() => {
@@ -105,6 +110,8 @@ export const Main = () => {
                                 price={book.price}
                                 category={book.category}
                                 asin={book.asin}
+                                selected={selectedCard === book.asin}
+                                handleSelect={highlightCard}
                             />
                         ))
                     ) : (

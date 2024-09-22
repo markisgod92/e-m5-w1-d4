@@ -3,16 +3,22 @@ import { useState } from 'react'
 import './bookcard.css'
 import { CommentArea } from '../comments/CommentArea'
 
-export const BookCard = ({ title, img, price, category, asin }) => {
-    const [isSelected, setIsSelected] = useState(false)
-
+export const BookCard = ({
+    title,
+    img,
+    price,
+    category,
+    asin,
+    selected,
+    handleSelect,
+}) => {
     return (
-        <Col sm md={isSelected ? 12 : 4} lg={isSelected ? 12 : 3}>
+        <Col sm md={selected ? 12 : 4} lg={selected ? 12 : 3}>
             <Row className="h-100">
                 <Col>
                     <div
-                        className={`book-card h-100 ${isSelected ? 'card-selected' : ''}`}
-                        onClick={() => setIsSelected(!isSelected)}
+                        className={`book-card h-100 ${selected ? 'card-selected' : ''}`}
+                        onClick={() => handleSelect(asin)}
                     >
                         <div className="image-wrapper h-100">
                             <img
@@ -28,11 +34,11 @@ export const BookCard = ({ title, img, price, category, asin }) => {
                         </div>
                     </div>
                 </Col>
-                {isSelected && (
+                {selected && (
                     <CommentArea
                         asin={asin}
                         title={title}
-                        deselectFunction={() => setIsSelected(false)}
+                        deselectFunction={() => handleSelect(null)}
                     />
                 )}
             </Row>

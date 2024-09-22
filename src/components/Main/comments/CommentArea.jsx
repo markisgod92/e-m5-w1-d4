@@ -78,10 +78,7 @@ export const CommentArea = ({ title, asin, deselectFunction }) => {
         <Col sm lg={8}>
             <div className="d-flex align-items-baseline justify-content-between">
                 <h3 className="mb-5">{title}</h3>
-                <Button
-                    variant="outline-danger"
-                    onClick={() => deselectFunction()}
-                >
+                <Button variant="outline-danger" onClick={deselectFunction}>
                     X
                 </Button>
             </div>
