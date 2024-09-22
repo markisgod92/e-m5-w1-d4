@@ -1,5 +1,5 @@
 import { Col, Button, Form } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactStars from "react-rating-stars-component";
 
 export const AddComment = ({ asin, reloadFunction }) => {

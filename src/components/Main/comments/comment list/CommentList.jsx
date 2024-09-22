@@ -1,7 +1,7 @@
 import { Col } from 'react-bootstrap';
 import { SingleComment } from './SingleComment';
 
-export const CommentList = ({ comments, deleteFunction }) => {
+export const CommentList = ({ asin, comments, modifyFunction, deleteFunction }) => {
    
     
 
@@ -16,9 +16,12 @@ export const CommentList = ({ comments, deleteFunction }) => {
                         comments.map((comment, i) => (
                             <SingleComment
                                 key={`comment-${i}`}
+                                id={comment._id}
+                                asin={asin}
                                 author={comment.author}
                                 rate={comment.rate}
                                 comment={comment.comment}
+                                modifyFunction={modifyFunction}
                                 deleteFunction={() => deleteFunction(comment._id)}
                             />
                         ))

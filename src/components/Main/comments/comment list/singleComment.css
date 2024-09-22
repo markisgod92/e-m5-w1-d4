@@ -4,14 +4,21 @@
 
 .action-btns {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 25%;
+    right: -50%;
     content: "";
     width: 100%;
-    height: 100%;
+    height: 50%;
     opacity: 0;
+    z-index: 2;
+    transition: all 0.1s ease-in-out;
 }
 
 .comment-div:hover .action-btns {
     opacity: 100%;
+    right: 5%;
+}
+
+.comment-div:hover {
+    background-color: rgba(231, 231, 231, 0.497);
 }

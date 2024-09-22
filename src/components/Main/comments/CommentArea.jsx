@@ -43,6 +43,24 @@ export const CommentArea = ({ title, asin, deselectFunction }) => {
     }
   }
 
+  const modifyComment = async (id, modifiedComment) => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/` + id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": API_AUTHORIZATION
+        },
+        body: JSON.stringify(modifiedComment)
+      })
+      if (response.ok) {
+        getComments()
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
     getComments()
   }, [])
@@ -72,7 +90,9 @@ export const CommentArea = ({ title, asin, deselectFunction }) => {
         )}
         {!isLoadingComments && !isFetchFailed && (
           <CommentList
+            asin={asin}
             comments={comments}
+            modifyFunction={modifyComment}
             deleteFunction={deleteComment}
           />
         )}
