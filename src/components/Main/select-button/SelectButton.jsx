@@ -1,7 +1,9 @@
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'
 
-export const SelectButton = ({text, onClick}) => {
+export const SelectButton = ({ text, onClick }) => {
     return (
-        <Button variant="primary" onClick={onClick}>{text}</Button>
+        <Button variant="primary" onClick={onClick}>
+            {text}
+        </Button>
     )
 }

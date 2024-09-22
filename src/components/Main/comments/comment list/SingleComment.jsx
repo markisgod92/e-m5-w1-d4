@@ -1,16 +1,24 @@
-import { Button, Form } from "react-bootstrap";
-import ReactStars from "react-rating-stars-component";
-import "bootstrap-icons/font/bootstrap-icons.min.css"
-import "./singleComment.css"
-import { useState } from "react";
+import { Button, Form } from 'react-bootstrap'
+import ReactStars from 'react-rating-stars-component'
+import 'bootstrap-icons/font/bootstrap-icons.min.css'
+import './singleComment.css'
+import { useState } from 'react'
 
-export const SingleComment = ({ asin, id, author, rate, comment, modifyFunction, deleteFunction }) => {
+export const SingleComment = ({
+    asin,
+    id,
+    author,
+    rate,
+    comment,
+    modifyFunction,
+    deleteFunction,
+}) => {
     const [isModifyOn, setIsModifyOn] = useState(false)
 
     const originalComment = {
         comment: comment,
         rate: rate,
-        elementId: `${asin}`
+        elementId: `${asin}`,
     }
 
     const [userComment, setUserComment] = useState(originalComment)
@@ -18,12 +26,17 @@ export const SingleComment = ({ asin, id, author, rate, comment, modifyFunction,
     const handleInputChange = (e) => {
         setUserComment({
             ...userComment,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
     const validateComment = () => {
-        return userComment.comment && userComment.rate && (userComment.comment !== originalComment.comment || userComment.rate !== originalComment.rate)
+        return (
+            userComment.comment &&
+            userComment.rate &&
+            (userComment.comment !== originalComment.comment ||
+                userComment.rate !== originalComment.rate)
+        )
     }
 
     return (
@@ -32,24 +45,28 @@ export const SingleComment = ({ asin, id, author, rate, comment, modifyFunction,
                 <div className="d-flex justify-content-between">
                     <h6>{author}</h6>
                     <ReactStars
-                        key={isModifyOn ? `editable-${asin}` : `readonly-${asin}`}
+                        key={
+                            isModifyOn ? `editable-${asin}` : `readonly-${asin}`
+                        }
                         count={5}
                         size={24}
                         isHalf={false}
                         value={userComment.rate}
                         edit={isModifyOn}
-                        onChange={(newRating => setUserComment({
-                            ...userComment,
-                            rate: newRating
-                        }))}
+                        onChange={(newRating) =>
+                            setUserComment({
+                                ...userComment,
+                                rate: newRating,
+                            })
+                        }
                     />
                 </div>
                 {isModifyOn ? (
                     <>
                         <Form.Control
-                            className='my-4'
+                            className="my-4"
                             as="textarea"
-                            name='comment'
+                            name="comment"
                             value={userComment.comment}
                             onChange={(e) => handleInputChange(e)}
                         />
@@ -71,7 +88,6 @@ export const SingleComment = ({ asin, id, author, rate, comment, modifyFunction,
                                 Modifica
                             </Button>
                         </div>
-
                     </>
                 ) : (
                     <p>{comment}</p>
@@ -85,15 +101,11 @@ export const SingleComment = ({ asin, id, author, rate, comment, modifyFunction,
                         >
                             <i className="bi bi-pencil-square"></i>
                         </Button>
-                        <Button
-                            variant="danger"
-                            onClick={deleteFunction}
-                        >
+                        <Button variant="danger" onClick={deleteFunction}>
                             <i className="bi bi-trash"></i>
                         </Button>
                     </div>
                 )}
-
             </div>
         </>
     )

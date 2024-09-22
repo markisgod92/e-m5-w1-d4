@@ -1,24 +1,25 @@
-import { Col, Button, Form } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import ReactStars from "react-rating-stars-component";
+import { Col, Button, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import ReactStars from 'react-rating-stars-component'
 
 export const AddComment = ({ asin, reloadFunction }) => {
-    const API_AUTHORIZATION = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8"
+    const API_AUTHORIZATION =
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
 
     const defaultState = {
-        comment: "",
+        comment: '',
         rate: 0,
-        elementId: `${asin}`
+        elementId: `${asin}`,
     }
 
     const [userComment, setUserComment] = useState(defaultState)
 
-    const [formAlert, setFormAlert] = useState("")
+    const [formAlert, setFormAlert] = useState('')
 
     const handleInputChange = (e) => {
         setUserComment({
             ...userComment,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }
 
@@ -30,21 +31,24 @@ export const AddComment = ({ asin, reloadFunction }) => {
         e.preventDefault()
 
         if (!validateComment()) {
-            setFormAlert("Campi non validi.")
+            setFormAlert('Campi non validi.')
             return
         }
 
         try {
-            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": API_AUTHORIZATION
-                },
-                body: JSON.stringify(userComment)
-            })
+            const response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/comments`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: API_AUTHORIZATION,
+                    },
+                    body: JSON.stringify(userComment),
+                }
+            )
             const data = await response.json()
-            setFormAlert("Commento inviato.")
+            setFormAlert('Commento inviato.')
         } catch (e) {
             console.error(e)
             setFormAlert(e)
@@ -56,35 +60,37 @@ export const AddComment = ({ asin, reloadFunction }) => {
 
     return (
         <Col sm md={6}>
-            <div className='d-flex flex-column'>
+            <div className="d-flex flex-column">
                 <h4>Aggiungi un commento</h4>
-                <hr className='w-100 mb-3' />
-                <Form
-                    onSubmit={(e) => postComment(e)}
-                >
+                <hr className="w-100 mb-3" />
+                <Form onSubmit={(e) => postComment(e)}>
                     <ReactStars
                         count={5}
                         size={24}
                         isHalf={false}
                         value={userComment.rate || 0}
-                        onChange={(newRating => setUserComment({
-                            ...userComment,
-                            rate: newRating
-                        }))}
+                        onChange={(newRating) =>
+                            setUserComment({
+                                ...userComment,
+                                rate: newRating,
+                            })
+                        }
                     />
                     <Form.Control
-                        className='my-4'
-                        as='textarea'
+                        className="my-4"
+                        as="textarea"
                         rows={4}
-                        placeholder='Lascia un commento...'
-                        name='comment'
+                        placeholder="Lascia un commento..."
+                        name="comment"
                         value={userComment.comment}
-                        onChange={(e) => handleInputChange(e)} 
+                        onChange={(e) => handleInputChange(e)}
                     />
                     {formAlert && (
-                        <div className='text-danger my-3'>{formAlert}</div>
+                        <div className="text-danger my-3">{formAlert}</div>
                     )}
-                    <Button variant='primary' type='Submit'>Invia</Button>
+                    <Button variant="primary" type="Submit">
+                        Invia
+                    </Button>
                 </Form>
             </div>
         </Col>
