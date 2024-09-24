@@ -1,4 +1,11 @@
 .hero-div {
-    background-color: #ff6f61;
     color: white;
+}
+
+.hero-light {
+    background-color: #ff6f61;
+}
+
+.hero-dark {
+    background-color: #6c2e29;
 }

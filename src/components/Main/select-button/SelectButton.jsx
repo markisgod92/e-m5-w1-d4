@@ -1,8 +1,15 @@
 import Button from 'react-bootstrap/Button'
+import { useContext } from 'react'
+import { ThemeContext } from '../../../context/Theme'
 
 export const SelectButton = ({ text, onClick }) => {
+    const {isDarkModeOn} = useContext(ThemeContext)
     return (
-        <Button variant="primary" onClick={onClick}>
+        <Button 
+        className='flex-grow-1 rounded-0 border-dark'
+        variant={isDarkModeOn ? "secondary" : "primary"}
+        onClick={onClick}
+        >
             {text}
         </Button>
     )

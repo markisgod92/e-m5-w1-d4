@@ -1,13 +1,17 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import './hero.css'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context/Theme'
 
 export const Welcome = () => {
+    const {isDarkModeOn} = useContext(ThemeContext)
+
     const showAlert = () => {
         alert('...aaand here it is an epic alert.')
     }
 
     return (
-        <div className="hero-div py-5">
+        <div className={`hero-div py-5 ${isDarkModeOn ? "hero-dark" : "hero-light"}`}>
             <Container>
                 <Row>
                     <Col>
