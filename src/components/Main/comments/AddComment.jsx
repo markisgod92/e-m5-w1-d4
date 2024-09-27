@@ -47,8 +47,8 @@ export const AddComment = ({ asin, reloadFunction }) => {
                     body: JSON.stringify(userComment),
                 }
             )
-            const data = await response.json()
-            setFormAlert('Commento inviato.')
+            
+            if(response.ok) setFormAlert('Commento inviato.')
         } catch (e) {
             console.error(e)
             setFormAlert(e)
@@ -59,7 +59,7 @@ export const AddComment = ({ asin, reloadFunction }) => {
     }
 
     return (
-        <Col sm md={6}>
+        <Col>
             <div className="d-flex flex-column">
                 <h4>Aggiungi un commento</h4>
                 <hr className="w-100 mb-3" />
@@ -88,7 +88,11 @@ export const AddComment = ({ asin, reloadFunction }) => {
                     {formAlert && (
                         <div className="text-danger my-3">{formAlert}</div>
                     )}
-                    <Button variant="primary" type="Submit">
+                    <Button
+                        variant="primary"
+                        type="Submit"
+                        disabled={!asin}
+                    >
                         Invia
                     </Button>
                 </Form>

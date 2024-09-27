@@ -10,7 +10,6 @@ import { ThemeContext } from '../../context/Theme'
 
 export const Main = () => {
     const {isDarkModeOn} = useContext(ThemeContext)
-    const [selectedCard, setSelectedCard] = useState(null)
     const {books, selectBooks} = useContext(BookContext)
 
     const highlightCard = (id) => {
@@ -45,8 +44,6 @@ export const Main = () => {
                                 price={book.price}
                                 category={book.category}
                                 asin={book.asin}
-                                selected={selectedCard === book.asin}
-                                handleSelect={highlightCard}
                             />
                         ))
                     ) : (

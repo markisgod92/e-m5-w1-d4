@@ -1,24 +1,24 @@
 import { Row, Col } from 'react-bootstrap'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './bookcard.css'
-import { CommentArea } from '../comments/CommentArea'
+import { CommentContext } from '../../../context/CommentContext'
 
 export const BookCard = ({
     title,
     img,
     price,
     category,
-    asin,
-    selected,
-    handleSelect,
+    asin
 }) => {
+    const {selectedAsin, setSelectedAsin} = useContext(CommentContext)
+
     return (
-        <Col sm md={selected ? 12 : 4} lg={selected ? 12 : 3}>
-            <Row className="h-100">
+        <Col sm={4}>
+            <Row className='h-100'>
                 <Col>
                     <div
-                        className={`book-card h-100 ${selected ? 'card-selected' : ''}`}
-                        onClick={() => handleSelect(asin)}
+                        className={`book-card h-100 ${selectedAsin === asin ? 'card-selected' : ''}`}
+                        onClick={() => setSelectedAsin(asin)}
                     >
                         <div className="image-wrapper h-100">
                             <img
@@ -34,13 +34,6 @@ export const BookCard = ({
                         </div>
                     </div>
                 </Col>
-                {selected && (
-                    <CommentArea
-                        asin={asin}
-                        title={title}
-                        deselectFunction={() => handleSelect(null)}
-                    />
-                )}
             </Row>
         </Col>
     )

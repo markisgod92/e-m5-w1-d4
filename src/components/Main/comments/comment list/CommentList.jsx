@@ -8,7 +8,7 @@ export const CommentList = ({
     deleteFunction,
 }) => {
     return (
-        <Col sm md={6}>
+        <Col>
             <div className="d-flex flex-column overflow-scroll">
                 <h4>Commenti</h4>
                 <hr className="w-100 mb-3" />
