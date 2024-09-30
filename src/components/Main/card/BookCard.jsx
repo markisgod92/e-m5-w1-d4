@@ -1,7 +1,8 @@
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Card, Button } from 'react-bootstrap'
 import { useContext, useState } from 'react'
-import './bookcard.css'
 import { CommentContext } from '../../../context/CommentContext'
+import { ThemeContext } from '../../../context/Theme'
+import "./bookcard.css"
 
 export const BookCard = ({
     title,
@@ -10,31 +11,39 @@ export const BookCard = ({
     category,
     asin
 }) => {
-    const {selectedAsin, setSelectedAsin} = useContext(CommentContext)
+    const { selectedAsin, setSelectedAsin } = useContext(CommentContext)
+    const {isDarkModeOn} = useContext(ThemeContext)
 
     return (
         <Col sm={4}>
-            <Row className='h-100'>
-                <Col>
-                    <div
-                        className={`book-card h-100 ${selectedAsin === asin ? 'card-selected' : ''}`}
-                        onClick={() => setSelectedAsin(asin)}
+            <Card 
+                className={`h-100 ${selectedAsin === asin ? "border-1 border-danger" : ""} ${isDarkModeOn ? "bg-dark-subtle" : ""}`}
+                onClick={() => setSelectedAsin(asin)}    
+            >
+                <Card.Img
+                    variant='top'
+                    src={img}
+                    className='p-2 book-card-img w-100 img-fluid object-fit-cover'
+                />
+                <Card.Body className='d-flex flex-column justify-content-between'>
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>{category}</Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                    <Button
+                        variant='success'
+                        className='w-100 mb-1'
                     >
-                        <div className="image-wrapper h-100">
-                            <img
-                                src={img}
-                                alt={title}
-                                className="position-relative h-100 w-100 object-fit-cover"
-                            />
-                        </div>
-                        <div className="book-overlay">
-                            <h6 className="fs-4">{title}</h6>
-                            <p>{category}</p>
-                            <p>{`${price} €`}</p>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+                        Buy for {price} €
+                    </Button>
+                    <Button
+                        variant='secondary'
+                        className='w-100'
+                    >
+                        Details
+                    </Button>
+                </Card.Footer>
+            </Card>
         </Col>
     )
 }

@@ -49,12 +49,18 @@ export const BookContextProvider = ({ children }) => {
     }
 
     const searchByName = () => {
-        const results = books.filter((book) =>
-            book.title.toLowerCase().includes(searchInput.trim().toLowerCase())
-        )
+        if(searchInput) {
+            const results = books.filter((book) =>
+                book.title.toLowerCase().includes(searchInput.trim().toLowerCase())
+            )
+            setBooks(results)
+        } else {
+            getAllBooks()
+        }
         setSearchInput('')
-        setBooks(results)
     }
+
+
 
     useEffect(() => {
         getAllBooks()

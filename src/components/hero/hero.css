@@ -1,11 +1,4 @@
-.hero-div {
-    color: white;
-}
-
-.hero-light {
-    background-color: #ff6f61;
-}
-
-.hero-dark {
-    background-color: #6c2e29;
+.random-book-img {
+    height: 500px;
+    max-height: 500px;
 }

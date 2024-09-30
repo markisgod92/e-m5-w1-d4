@@ -7,7 +7,7 @@ export const SelectButton = ({ text, onClick }) => {
     return (
         <Button 
         className='flex-grow-1 rounded-0 border-dark'
-        variant={isDarkModeOn ? "secondary" : "primary"}
+        variant="success"
         onClick={onClick}
         >
             {text}

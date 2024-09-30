@@ -7,16 +7,17 @@ import { Form, Button } from 'react-bootstrap'
 import { useContext } from 'react'
 import { BookContext } from '../../context/BookContext.jsx'
 import { ThemeContext } from '../../context/Theme.jsx'
+import "./nav.css"
 
 export const MyNav = () => {
     const { searchInput, setSearchInput, searchByName } = useContext(BookContext)
     const { isDarkModeOn, toggleDarkMode } = useContext(ThemeContext)
 
     return (
-        <Navbar expand="lg" className={isDarkModeOn ? "bg-dark" : "bg-primary"}>
+        <Navbar expand="lg" className={`border-bottom border-3 border-success ${isDarkModeOn ? "bg-dark text-white" : ""}`}>
             <Container fluid>
-                <Navbar.Brand href="#home" className="text-white">
-                    Epibooks
+                <Navbar.Brand href="#home" className="fs-1 fw-bold text-success">
+                    EpiBooks
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -37,19 +38,17 @@ export const MyNav = () => {
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
                         <Button
-                            variant="danger"
+                            variant="success"
                             onClick={searchByName}
                         >
                             Cerca
                         </Button>
                     </Form>
                 </Navbar.Collapse>
-                <Button
-                    variant={isDarkModeOn ? "dark" : "primary"}
+                <Form.Switch
+                    className='ms-3 theme-switch'
                     onClick={toggleDarkMode}
-                >
-                    <i className={`bi ${!isDarkModeOn ? "bi-toggle-off" : "bi-toggle-on"} fs-3`}></i>
-                </Button>
+                />
             </Container>
         </Navbar>
     )

@@ -89,7 +89,7 @@ export const AddComment = ({ asin, reloadFunction }) => {
                         <div className="text-danger my-3">{formAlert}</div>
                     )}
                     <Button
-                        variant="primary"
+                        variant="success"
                         type="Submit"
                         disabled={!asin}
                     >

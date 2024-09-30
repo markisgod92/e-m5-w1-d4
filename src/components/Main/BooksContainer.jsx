@@ -8,7 +8,7 @@ import { ThemeContext } from '../../context/Theme'
 
 
 
-export const Main = () => {
+export const BooksContainer = () => {
     const {isDarkModeOn} = useContext(ThemeContext)
     const {books, selectBooks} = useContext(BookContext)
 
@@ -17,7 +17,7 @@ export const Main = () => {
     }
 
     return (
-        <main className={`pt-3 pb-5 ${isDarkModeOn ? "bg-dark text-white" : ""}`}>
+        <div className="pt-5 pb-5">
             <Container>
                 <Row className="mb-5">
                     <Col sm>
@@ -34,7 +34,7 @@ export const Main = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row className="pb-5 g-5">
+                <Row className="pb-5 g-2">
                     {books.length > 0 ? (
                         books.map((book) => (
                             <BookCard
@@ -51,6 +51,6 @@ export const Main = () => {
                     )}
                 </Row>
             </Container>
-        </main>
+        </div>
     )
 }

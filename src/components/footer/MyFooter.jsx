@@ -6,7 +6,7 @@ export const MyFooter = () => {
     const {isDarkModeOn} = useContext(ThemeContext)
 
     return (
-        <footer className={`fixed-bottom p-4 ${isDarkModeOn ? "bg-dark text-white" : "bg-primary-subtle"}`}>
+        <footer className={`fixed-bottom p-4 ${isDarkModeOn ? "bg-dark text-success border-top border-3 border-success" : "bg-success text-white"}`}>
             <Container fluid>
                 <Row>
                     <Col>
