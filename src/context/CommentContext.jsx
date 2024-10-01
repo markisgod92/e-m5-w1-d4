@@ -1,12 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from 'react'
 
 export const CommentContext = createContext()
 
-export const CommentContextProvider = ({children}) => {
+export const CommentContextProvider = ({ children }) => {
     const [comments, setComments] = useState([])
     const [isLoadingComments, setIsLoadingComments] = useState(false)
     const [isFetchFailed, setIsFetchFailed] = useState(false)
-    const [selectedAsin, setSelectedAsin] = useState("")
+    const [selectedAsin, setSelectedAsin] = useState('')
 
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
@@ -72,7 +72,7 @@ export const CommentContextProvider = ({children}) => {
 
     const handleSelectedAsin = (asin) => {
         if (selectedAsin && selectedAsin === asin) {
-            setSelectedAsin("")
+            setSelectedAsin('')
         } else {
             setSelectedAsin(asin)
         }
@@ -82,10 +82,20 @@ export const CommentContextProvider = ({children}) => {
         getComments()
     }, [selectedAsin])
 
-
     return (
         <CommentContext.Provider
-        value={{comments, isLoadingComments, isFetchFailed, getComments, modifyComment, deleteComment, selectedAsin, handleSelectedAsin}}>
+            value={{
+                comments,
+                isLoadingComments,
+                isFetchFailed,
+                getComments,
+                modifyComment,
+                deleteComment,
+                selectedAsin,
+                setSelectedAsin,
+                handleSelectedAsin,
+            }}
+        >
             {children}
         </CommentContext.Provider>
     )

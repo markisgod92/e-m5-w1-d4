@@ -2,7 +2,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../../context/Theme'
 import { BookContext } from '../../context/BookContext'
-import "./hero.css"
+import './hero.css'
 
 export const Welcome = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
@@ -10,7 +10,7 @@ export const Welcome = () => {
     const [randomBook, setRandomBook] = useState(null)
 
     const getRandomBook = () => {
-        const randomIndex = Math.floor(Math.random() * books.length);
+        const randomIndex = Math.floor(Math.random() * books.length)
         setRandomBook(books.at(randomIndex))
     }
 
@@ -23,34 +23,33 @@ export const Welcome = () => {
     }, [books])
 
     return (
-        <div className={isDarkModeOn ? "bg-dark-subtle" : "bg-white"}>
+        <div className={isDarkModeOn ? 'bg-dark-subtle' : 'bg-white'}>
             <Container>
-                <Row className='py-5 text-center'>
+                <Row className="py-5 text-center">
                     <h1>Welcome to Epibooks!</h1>
                 </Row>
-                <Row className='pb-5'>
+                <Row className="pb-5">
                     <Col sm md={6}>
-                        <div className='d-flex justify-content-center justify-content-md-end pe-md-5'>
+                        <div className="d-flex justify-content-center justify-content-md-end pe-md-5">
                             {randomBook && (
                                 <img
                                     src={randomBook.img}
                                     alt={randomBook.title}
-                                    className='random-book-img img-fluid object-fit-cover'
+                                    className="random-book-img img-fluid object-fit-cover"
                                 />
                             )}
                         </div>
                     </Col>
                     <Col sm md={6}>
-                        <div className='h-100 d-flex flex-column justify-content-between gap-5 py-0 py-md-5 mt-3 mt-md-0'>
-                            <div className='d-flex flex-column gap-3'>
-                                <p className='fw-bold text-center'>You may like:</p>
+                        <div className="h-100 d-flex flex-column justify-content-between gap-5 py-0 py-md-5 mt-3 mt-md-0">
+                            <div className="d-flex flex-column gap-3">
+                                <p className="fw-bold text-center">
+                                    You may like:
+                                </p>
                                 {randomBook && <h3>{randomBook.title}</h3>}
                             </div>
                             {randomBook && (
-                                <Button
-                                    variant='success'
-                                    onClick={showAlert}
-                                >
+                                <Button variant="success" onClick={showAlert}>
                                     Buy for {randomBook.price} €
                                 </Button>
                             )}

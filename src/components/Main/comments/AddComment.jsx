@@ -1,5 +1,5 @@
 import { Col, Button, Form } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ReactStars from 'react-rating-stars-component'
 
 export const AddComment = ({ asin, reloadFunction }) => {
@@ -47,8 +47,8 @@ export const AddComment = ({ asin, reloadFunction }) => {
                     body: JSON.stringify(userComment),
                 }
             )
-            
-            if(response.ok) setFormAlert('Commento inviato.')
+
+            if (response.ok) setFormAlert('Commento inviato.')
         } catch (e) {
             console.error(e)
             setFormAlert(e)
@@ -88,11 +88,7 @@ export const AddComment = ({ asin, reloadFunction }) => {
                     {formAlert && (
                         <div className="text-danger my-3">{formAlert}</div>
                     )}
-                    <Button
-                        variant="success"
-                        type="Submit"
-                        disabled={!asin}
-                    >
+                    <Button variant="success" type="Submit" disabled={!asin}>
                         Invia
                     </Button>
                 </Form>

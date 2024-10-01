@@ -1,20 +1,12 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { selectors } from '../../data/data'
 import { SelectButton } from './select-button/SelectButton'
 import { BookCard } from './card/BookCard'
 import { BookContext } from '../../context/BookContext'
-import { ThemeContext } from '../../context/Theme'
-
-
 
 export const BooksContainer = () => {
-    const {isDarkModeOn} = useContext(ThemeContext)
-    const {books, selectBooks} = useContext(BookContext)
-
-    const highlightCard = (id) => {
-        setSelectedCard(id)
-    }
+    const { books, selectBooks } = useContext(BookContext)
 
     return (
         <div className="pt-5 pb-5">

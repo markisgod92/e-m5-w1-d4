@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from 'react'
 
 import fantasyBooks from '../assets/books/fantasy.json'
 import historyBooks from '../assets/books/history.json'
@@ -49,9 +49,11 @@ export const BookContextProvider = ({ children }) => {
     }
 
     const searchByName = () => {
-        if(searchInput) {
+        if (searchInput) {
             const results = books.filter((book) =>
-                book.title.toLowerCase().includes(searchInput.trim().toLowerCase())
+                book.title
+                    .toLowerCase()
+                    .includes(searchInput.trim().toLowerCase())
             )
             setBooks(results)
         } else {
@@ -60,18 +62,22 @@ export const BookContextProvider = ({ children }) => {
         setSearchInput('')
     }
 
-
-
     useEffect(() => {
         getAllBooks()
     }, [])
 
     return (
         <BookContext.Provider
-            value={{ books, setBooks, searchInput, setSearchInput, searchByName, selectBooks }}
+            value={{
+                books,
+                setBooks,
+                searchInput,
+                setSearchInput,
+                searchByName,
+                selectBooks,
+            }}
         >
             {children}
         </BookContext.Provider>
-
     )
 }
