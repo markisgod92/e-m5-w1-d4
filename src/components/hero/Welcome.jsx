@@ -6,12 +6,12 @@ import './hero.css'
 
 export const Welcome = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
-    const { books } = useContext(BookContext)
+    const { allBooks } = useContext(BookContext)
     const [randomBook, setRandomBook] = useState(null)
 
     const getRandomBook = () => {
-        const randomIndex = Math.floor(Math.random() * books.length)
-        setRandomBook(books.at(randomIndex))
+        const randomIndex = Math.floor(Math.random() * allBooks.length)
+        setRandomBook(allBooks.at(randomIndex))
     }
 
     const showAlert = () => {
@@ -19,8 +19,8 @@ export const Welcome = () => {
     }
 
     useEffect(() => {
-        if (books.length > 0 && !randomBook) getRandomBook()
-    }, [books])
+        if (allBooks.length > 1 && !randomBook) getRandomBook()
+    }, [allBooks])
 
     return (
         <div className={isDarkModeOn ? 'bg-dark-subtle' : 'bg-white'}>

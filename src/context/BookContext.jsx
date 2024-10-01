@@ -9,24 +9,24 @@ import scifiBooks from '../assets/books/scifi.json'
 export const BookContext = createContext()
 
 export const BookContextProvider = ({ children }) => {
+    const [allBooks, setAllBooks] = useState([
+        ...fantasyBooks.slice(0, 20),
+        ...historyBooks.slice(0, 20),
+        ...horrorBooks.slice(0, 20),
+        ...romanceBooks.slice(0, 20),
+        ...scifiBooks.slice(0, 20),
+    ])
     const [books, setBooks] = useState([])
     const [searchInput, setSearchInput] = useState('')
 
-    const getAllBooks = () => {
-        const allBooks = [
-            ...fantasyBooks.slice(0, 5),
-            ...historyBooks.slice(0, 5),
-            ...horrorBooks.slice(0, 5),
-            ...romanceBooks.slice(0, 5),
-            ...scifiBooks.slice(0, 5),
-        ]
+    const getBooks = () => {
         setBooks(allBooks)
     }
 
     const selectBooks = (genre) => {
         switch (genre) {
             case 'all':
-                getAllBooks()
+                getBooks()
                 break
             case 'fantasy':
                 setBooks(fantasyBooks.slice(0, 20))
@@ -57,18 +57,19 @@ export const BookContextProvider = ({ children }) => {
             )
             setBooks(results)
         } else {
-            getAllBooks()
+            getBooks()
         }
         setSearchInput('')
     }
 
     useEffect(() => {
-        getAllBooks()
+        getBooks()
     }, [])
 
     return (
         <BookContext.Provider
             value={{
+                allBooks,
                 books,
                 setBooks,
                 searchInput,

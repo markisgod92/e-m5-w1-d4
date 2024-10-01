@@ -2,7 +2,6 @@ import { Col, Card, Button } from 'react-bootstrap'
 import { useContext } from 'react'
 import { CommentContext } from '../../../context/CommentContext'
 import { ThemeContext } from '../../../context/Theme'
-import './bookcard.css'
 import { useNavigate } from 'react-router-dom'
 
 export const BookCard = ({ title, img, price, category, asin }) => {
@@ -20,7 +19,7 @@ export const BookCard = ({ title, img, price, category, asin }) => {
                 <Card.Img
                     variant="top"
                     src={img}
-                    className="p-2 book-card-img w-100 h-100 img-fluid object-fit-cover"
+                    className="p-2 w-100 h-100 img-fluid object-fit-cover"
                 />
                 <Card.Body className="d-flex flex-column justify-content-between">
                     <Card.Title>{title}</Card.Title>

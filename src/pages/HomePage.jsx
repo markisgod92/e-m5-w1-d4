@@ -21,7 +21,7 @@ export const HomePage = () => {
             >
                 <Container>
                     <Row>
-                        <Col sm md={selectedAsin ? 8 : 12}>
+                        <Col sm md={selectedAsin ? 8 : 12} className='vh-100 overflow-y-scroll'>
                             <BooksContainer />
                         </Col>
                         {selectedAsin && (

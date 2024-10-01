@@ -7,15 +7,20 @@ import { useContext } from 'react'
 import { BookContext } from '../../context/BookContext.jsx'
 import { ThemeContext } from '../../context/Theme.jsx'
 import './nav.css'
+import { useNavigate } from 'react-router-dom'
+import { CommentContext } from '../../context/CommentContext.jsx'
 
 export const MyNav = () => {
     const { searchInput, setSearchInput, searchByName } =
         useContext(BookContext)
     const { isDarkModeOn, setDarkModeOn } = useContext(ThemeContext)
+    const {setSelectedAsin} = useContext(CommentContext)
 
     const toggleDarkMode = (e) => {
         setDarkModeOn(e.target.checked)
     }
+    
+    const navigate = useNavigate()
 
     return (
         <Navbar
@@ -40,7 +45,14 @@ export const MyNav = () => {
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
-                        <Button variant="success" onClick={searchByName}>
+                        <Button variant="success" onClick={() => {
+                            searchByName()
+                            // if not on home, open home and reset asin
+                            if (window.location.pathname !== '/') {
+                                setSelectedAsin("")
+                                navigate('/')
+                            }
+                        }}>
                             Cerca
                         </Button>
                     </Form>
