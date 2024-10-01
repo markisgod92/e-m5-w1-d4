@@ -32,10 +32,7 @@ export const BookCard = ({ title, img, price, category, asin }) => {
                     <Button
                         variant="secondary"
                         className="w-100"
-                        onClick={() => {
-                            setSelectedAsin(asin)
-                            navigate(`/book/${asin}`)
-                        }}
+                        onClick={() => navigate(`/book/${asin}`)}
                     >
                         Details
                     </Button>

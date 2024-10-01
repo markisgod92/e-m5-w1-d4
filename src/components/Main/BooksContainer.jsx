@@ -28,9 +28,9 @@ export const BooksContainer = () => {
                 </Row>
                 <Row className="pb-5 g-2">
                     {books.length > 0 ? (
-                        books.map((book) => (
+                        books.map((book, i) => (
                             <BookCard
-                                key={book.asin}
+                                key={i}
                                 title={book.title}
                                 img={book.img}
                                 price={book.price}
@@ -39,7 +39,7 @@ export const BooksContainer = () => {
                             />
                         ))
                     ) : (
-                        <p>Non ci sono libri.</p>
+                        <p>There aren't any books.</p>
                     )}
                 </Row>
             </Container>

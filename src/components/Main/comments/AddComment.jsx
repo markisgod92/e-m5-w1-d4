@@ -1,8 +1,11 @@
 import { Col, Button, Form } from 'react-bootstrap'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ReactStars from 'react-rating-stars-component'
+import { CommentContext } from '../../../context/CommentContext'
 
-export const AddComment = ({ asin, reloadFunction }) => {
+export const AddComment = ({ asin }) => {
+    const {getComments} = useContext(CommentContext)
+
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
 
@@ -13,7 +16,9 @@ export const AddComment = ({ asin, reloadFunction }) => {
     }
 
     const [userComment, setUserComment] = useState(defaultState)
+    const [starsCount, setStarsCount] = useState(0)
 
+    console.log(userComment.rate)
     const [formAlert, setFormAlert] = useState('')
 
     const handleInputChange = (e) => {
@@ -53,10 +58,14 @@ export const AddComment = ({ asin, reloadFunction }) => {
             console.error(e)
             setFormAlert(e)
         } finally {
-            reloadFunction()
+            getComments()
             setUserComment(defaultState)
         }
     }
+
+    useEffect(() => {
+        setStarsCount(prev => (prev + 1))
+    }, [userComment.rate])
 
     return (
         <Col>
@@ -65,6 +74,7 @@ export const AddComment = ({ asin, reloadFunction }) => {
                 <hr className="w-100 mb-3" />
                 <Form onSubmit={(e) => postComment(e)}>
                     <ReactStars
+                        key={starsCount}
                         count={5}
                         size={24}
                         isHalf={false}

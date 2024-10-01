@@ -2,7 +2,8 @@ import { Button, Form } from 'react-bootstrap'
 import ReactStars from 'react-rating-stars-component'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import './singleComment.css'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CommentContext } from '../../../../context/CommentContext'
 
 export const SingleComment = ({
     asin,
@@ -10,10 +11,9 @@ export const SingleComment = ({
     author,
     rate,
     comment,
-    modifyFunction,
-    deleteFunction,
 }) => {
     const [isModifyOn, setIsModifyOn] = useState(false)
+    const {modifyComment, deleteComment} = useContext(CommentContext)
 
     const originalComment = {
         comment: comment,
@@ -83,7 +83,7 @@ export const SingleComment = ({
                             <Button
                                 variant="success"
                                 disabled={!validateComment()}
-                                onClick={() => modifyFunction(id, userComment)}
+                                onClick={() => modifyComment(id, userComment)}
                             >
                                 Modifica
                             </Button>
@@ -101,7 +101,7 @@ export const SingleComment = ({
                         >
                             <i className="bi bi-pencil-square"></i>
                         </Button>
-                        <Button variant="danger" onClick={deleteFunction}>
+                        <Button variant="danger" onClick={() => deleteComment(id)}>
                             <i className="bi bi-trash"></i>
                         </Button>
                     </div>

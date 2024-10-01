@@ -5,12 +5,14 @@ import { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../context/BookContext'
 import { CommentArea } from '../components/Main/comments/CommentArea'
 import { ThemeContext } from '../context/Theme'
+import { CommentContext } from '../context/CommentContext'
 
 export const BookPage = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
     const { asin } = useParams()
     const { books } = useContext(BookContext)
     const [book, setBook] = useState(null)
+    const {setSelectedAsin} = useContext(CommentContext)
 
     const getBookData = () => {
         const foundBook = books.find((book) => book.asin === asin)
@@ -20,6 +22,10 @@ export const BookPage = () => {
     useEffect(() => {
         getBookData()
     }, [asin, books])
+
+    useEffect(() => {
+        setSelectedAsin(asin)
+    }, [asin])
 
     return (
         <NavAndFooterProvider>

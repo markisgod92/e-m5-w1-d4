@@ -11,9 +11,6 @@ export const CommentArea = ({ title, asin }) => {
         comments,
         isLoadingComments,
         isFetchFailed,
-        getComments,
-        modifyComment,
-        deleteComment,
         selectedAsin,
     } = useContext(CommentContext)
 
@@ -21,7 +18,7 @@ export const CommentArea = ({ title, asin }) => {
         <>
             <h3 className="mb-5">{title}</h3>
             <Row>
-                <AddComment asin={selectedAsin} reloadFunction={getComments} />
+                <AddComment asin={selectedAsin} />
             </Row>
             <Row className="mt-5">
                 {isLoadingComments && !isFetchFailed && (
@@ -38,8 +35,6 @@ export const CommentArea = ({ title, asin }) => {
                     <CommentList
                         asin={selectedAsin}
                         comments={comments}
-                        modifyFunction={modifyComment}
-                        deleteFunction={deleteComment}
                     />
                 )}
             </Row>

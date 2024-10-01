@@ -3,9 +3,7 @@ import { SingleComment } from './SingleComment'
 
 export const CommentList = ({
     asin,
-    comments,
-    modifyFunction,
-    deleteFunction,
+    comments
 }) => {
     return (
         <Col>
@@ -22,10 +20,6 @@ export const CommentList = ({
                                   author={comment.author}
                                   rate={comment.rate}
                                   comment={comment.comment}
-                                  modifyFunction={modifyFunction}
-                                  deleteFunction={() =>
-                                      deleteFunction(comment._id)
-                                  }
                               />
                           ))
                         : 'Non ci sono commenti'}
