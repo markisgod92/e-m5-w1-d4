@@ -70,6 +70,14 @@ export const CommentContextProvider = ({children}) => {
         }
     }
 
+    const handleSelectedAsin = (asin) => {
+        if (selectedAsin && selectedAsin === asin) {
+            setSelectedAsin("")
+        } else {
+            setSelectedAsin(asin)
+        }
+    }
+
     useEffect(() => {
         getComments()
     }, [selectedAsin])
@@ -77,7 +85,7 @@ export const CommentContextProvider = ({children}) => {
 
     return (
         <CommentContext.Provider
-        value={{comments, isLoadingComments, isFetchFailed, getComments, modifyComment, deleteComment, selectedAsin, setSelectedAsin}}>
+        value={{comments, isLoadingComments, isFetchFailed, getComments, modifyComment, deleteComment, selectedAsin, handleSelectedAsin}}>
             {children}
         </CommentContext.Provider>
     )

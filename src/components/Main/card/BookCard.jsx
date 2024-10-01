@@ -11,19 +11,19 @@ export const BookCard = ({
     category,
     asin
 }) => {
-    const { selectedAsin, setSelectedAsin } = useContext(CommentContext)
+    const { selectedAsin, handleSelectedAsin } = useContext(CommentContext)
     const {isDarkModeOn} = useContext(ThemeContext)
 
     return (
-        <Col sm={4}>
+        <Col sm={selectedAsin ? 4 : 3}>
             <Card 
                 className={`h-100 ${selectedAsin === asin ? "border-1 border-danger" : ""} ${isDarkModeOn ? "bg-dark-subtle" : ""}`}
-                onClick={() => setSelectedAsin(asin)}    
+                onClick={() => handleSelectedAsin(asin)}    
             >
                 <Card.Img
                     variant='top'
                     src={img}
-                    className='p-2 book-card-img w-100 img-fluid object-fit-cover'
+                    className='p-2 book-card-img w-100 h-100 img-fluid object-fit-cover'
                 />
                 <Card.Body className='d-flex flex-column justify-content-between'>
                     <Card.Title>{title}</Card.Title>
