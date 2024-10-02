@@ -4,7 +4,7 @@ import ReactStars from 'react-rating-stars-component'
 import { CommentContext } from '../../../context/CommentContext'
 
 export const AddComment = ({ asin }) => {
-    const {getComments} = useContext(CommentContext)
+    const {getComments, selectedAsin} = useContext(CommentContext)
 
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
@@ -12,13 +12,11 @@ export const AddComment = ({ asin }) => {
     const defaultState = {
         comment: '',
         rate: 0,
-        elementId: `${asin}`,
+        elementId: `${selectedAsin}`,
     }
 
     const [userComment, setUserComment] = useState(defaultState)
     const [starsCount, setStarsCount] = useState(0)
-
-    console.log(userComment.rate)
     const [formAlert, setFormAlert] = useState('')
 
     const handleInputChange = (e) => {
@@ -29,7 +27,7 @@ export const AddComment = ({ asin }) => {
     }
 
     const validateComment = () => {
-        return userComment.comment && userComment.rate
+        return userComment.comment && userComment.rate && userComment.elementId === selectedAsin
     }
 
     const postComment = async (e) => {
@@ -67,6 +65,14 @@ export const AddComment = ({ asin }) => {
         setStarsCount(prev => (prev + 1))
     }, [userComment.rate])
 
+    useEffect(() => {
+        setUserComment(prev => ({
+            ...prev,
+            elementId: selectedAsin
+        }));
+        setFormAlert("")
+    }, [selectedAsin])
+
     return (
         <Col>
             <div className="d-flex flex-column">
@@ -96,9 +102,9 @@ export const AddComment = ({ asin }) => {
                         onChange={(e) => handleInputChange(e)}
                     />
                     {formAlert && (
-                        <div className="text-danger my-3">{formAlert}</div>
+                        <div className="text-success my-3">{formAlert}</div>
                     )}
-                    <Button variant="success" type="Submit" disabled={!asin}>
+                    <Button variant="success" type="Submit" disabled={!selectedAsin}>
                         Invia
                     </Button>
                 </Form>
