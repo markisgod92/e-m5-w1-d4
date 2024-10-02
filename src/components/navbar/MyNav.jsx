@@ -7,14 +7,12 @@ import { useContext } from 'react'
 import { BookContext } from '../../context/BookContext.jsx'
 import { ThemeContext } from '../../context/Theme.jsx'
 import './nav.css'
-import { useNavigate } from 'react-router-dom'
-import { CommentContext } from '../../context/CommentContext.jsx'
+import { useNavigate, Link } from 'react-router-dom'
 
 export const MyNav = () => {
     const { searchInput, setSearchInput, searchByName } =
         useContext(BookContext)
     const { isDarkModeOn, setDarkModeOn } = useContext(ThemeContext)
-    const {setSelectedAsin} = useContext(CommentContext)
 
     const toggleDarkMode = (e) => {
         setDarkModeOn(e.target.checked)
@@ -25,12 +23,12 @@ export const MyNav = () => {
     return (
         <Navbar
             expand="lg"
-            className={`border-bottom border-3 border-success ${isDarkModeOn ? 'bg-dark text-white' : ''}`}
+            className={`sticky-top border-bottom border-3 border-success ${isDarkModeOn ? 'bg-dark text-white' : 'bg-white'}`}
         >
             <Container fluid>
-                <Navbar.Brand href="/" className="fs-1 fw-bold text-success">
-                    EpiBooks
-                </Navbar.Brand>
+                <Link to='/' className='text-decoration-none text-success fw-bold pe-5'>
+                    <h1>EpiBooks</h1>
+                </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -48,20 +46,17 @@ export const MyNav = () => {
                         <Button variant="success" onClick={() => {
                             searchByName()
                             // if not on home, open home and reset asin
-                            if (window.location.pathname !== '/') {
-                                setSelectedAsin("")
-                                navigate('/')
-                            }
+                            if (window.location.pathname !== '/') navigate('/')
                         }}>
                             Cerca
                         </Button>
                     </Form>
-                </Navbar.Collapse>
-                <Form.Switch
+                    <Form.Switch
                     className="ms-3 theme-switch"
                     checked={isDarkModeOn}
                     onChange={toggleDarkMode}
                 />
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     )

@@ -83,7 +83,7 @@ export const SingleComment = ({
                             <Button
                                 variant="success"
                                 disabled={!validateComment()}
-                                onClick={() => modifyComment(id, userComment)}
+                                onClick={() => modifyComment(asin, id, userComment)}
                             >
                                 Modifica
                             </Button>

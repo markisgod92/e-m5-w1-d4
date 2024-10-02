@@ -1,15 +1,12 @@
 import { NavAndFooterProvider } from '../context/NavAndFooterContext'
 import { Container, Row, Col } from 'react-bootstrap'
-import { CommentArea } from '../components/Main/comments/CommentArea'
 import { ThemeContext } from '../context/Theme'
 import { BooksContainer } from '../components/Main/BooksContainer'
-import { CommentContext } from '../context/CommentContext'
 import { Welcome } from '../components/hero/Welcome'
 import { useContext } from 'react'
 
 export const HomePage = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
-    const { selectedAsin } = useContext(CommentContext)
 
     return (
         <NavAndFooterProvider>
@@ -21,14 +18,7 @@ export const HomePage = () => {
             >
                 <Container>
                     <Row>
-                        <Col sm md={selectedAsin ? 8 : 12} className='vh-100 overflow-y-scroll'>
-                            <BooksContainer />
-                        </Col>
-                        {selectedAsin && (
-                            <Col sm md={4}>
-                                <CommentArea />
-                            </Col>
-                        )}
+                        <BooksContainer />
                     </Row>
                 </Container>
             </main>

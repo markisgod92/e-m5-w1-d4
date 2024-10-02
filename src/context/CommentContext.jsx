@@ -6,19 +6,18 @@ export const CommentContextProvider = ({ children }) => {
     const [comments, setComments] = useState([])
     const [isLoadingComments, setIsLoadingComments] = useState(false)
     const [isFetchFailed, setIsFetchFailed] = useState(false)
-    const [selectedAsin, setSelectedAsin] = useState('')
 
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
 
-    const getComments = async () => {
-        if (!selectedAsin) return
+    const getComments = async (asin) => {
+        if (!asin) return
 
         setIsLoadingComments(true)
 
         try {
             const response = await fetch(
-                `https://striveschool-api.herokuapp.com/api/books/${selectedAsin}/comments/`
+                `https://striveschool-api.herokuapp.com/api/books/${asin}/comments/`
             )
             const data = await response.json()
             setComments(data)
@@ -49,7 +48,7 @@ export const CommentContextProvider = ({ children }) => {
         }
     }
 
-    const modifyComment = async (id, modifiedComment) => {
+    const modifyComment = async (asin, id, modifiedComment) => {
         try {
             const response = await fetch(
                 `https://striveschool-api.herokuapp.com/api/comments/` + id,
@@ -63,24 +62,12 @@ export const CommentContextProvider = ({ children }) => {
                 }
             )
             if (response.ok) {
-                getComments()
+                getComments(asin)
             }
         } catch (e) {
             console.error(e)
         }
     }
-
-    const handleSelectedAsin = (asin) => {
-        if (selectedAsin && selectedAsin === asin) {
-            setSelectedAsin('')
-        } else {
-            setSelectedAsin(asin)
-        }
-    }
-
-    useEffect(() => {
-        getComments()
-    }, [selectedAsin])
 
     return (
         <CommentContext.Provider
@@ -91,9 +78,6 @@ export const CommentContextProvider = ({ children }) => {
                 getComments,
                 modifyComment,
                 deleteComment,
-                selectedAsin,
-                setSelectedAsin,
-                handleSelectedAsin,
             }}
         >
             {children}

@@ -5,16 +5,13 @@ import { ThemeContext } from '../../../context/Theme'
 import { useNavigate } from 'react-router-dom'
 
 export const BookCard = ({ title, img, price, category, asin }) => {
-    const { selectedAsin, setSelectedAsin, handleSelectedAsin } =
-        useContext(CommentContext)
     const { isDarkModeOn } = useContext(ThemeContext)
     const navigate = useNavigate()
 
     return (
-        <Col sm={selectedAsin ? 4 : 3}>
+        <Col sm={3}>
             <Card
-                className={`h-100 ${selectedAsin === asin ? 'border-1 border-danger' : ''} ${isDarkModeOn ? 'bg-dark-subtle' : ''}`}
-                onClick={() => handleSelectedAsin(asin)}
+                className={`h-100 ${isDarkModeOn ? 'bg-dark-subtle' : ''}`}
             >
                 <Card.Img
                     variant="top"

@@ -1,5 +1,5 @@
 import { Row, Col } from 'react-bootstrap'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CommentList } from './comment list/CommentList'
 import { AddComment } from './AddComment'
 import { Loader } from '../../loader/Loader'
@@ -11,14 +11,18 @@ export const CommentArea = ({ title, asin }) => {
         comments,
         isLoadingComments,
         isFetchFailed,
-        selectedAsin,
+        getComments
     } = useContext(CommentContext)
+
+    useEffect(() => {
+        getComments(asin)
+    }, [])
 
     return (
         <>
             <h3 className="mb-5">{title}</h3>
             <Row>
-                <AddComment asin={selectedAsin} />
+                <AddComment asin={asin} />
             </Row>
             <Row className="mt-5">
                 {isLoadingComments && !isFetchFailed && (
@@ -33,7 +37,7 @@ export const CommentArea = ({ title, asin }) => {
                 )}
                 {!isLoadingComments && !isFetchFailed && (
                     <CommentList
-                        asin={selectedAsin}
+                        asin={asin}
                         comments={comments}
                     />
                 )}
