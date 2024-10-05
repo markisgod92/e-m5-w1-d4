@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { MemoryRouter} from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { ThemeContextProvider } from '../../../context/Theme'
 import { render } from '@testing-library/react'
 import { BookCard } from './BookCard'
@@ -11,11 +11,11 @@ describe('Test Book Card component', () => {
         const { getByText, getByRole } = render(
             <MemoryRouter>
                 <ThemeContextProvider value={mockDarkMode}>
-                    <BookCard 
-                        title='Book Title'
-                        img='https://picsum.photos/200/300'
+                    <BookCard
+                        title="Book Title"
+                        img="https://picsum.photos/200/300"
                         price={9.99}
-                        category='testCategory'
+                        category="testCategory"
                         asin={12345}
                     />
                 </ThemeContextProvider>

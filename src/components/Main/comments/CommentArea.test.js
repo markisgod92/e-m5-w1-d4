@@ -11,10 +11,7 @@ describe('Test Comment Area', () => {
         const { getByText } = render(
             <ThemeContextProvider value={mockDarkMode}>
                 <CommentContextProvider>
-                    <CommentArea
-                        title='title'
-                        asin='12345'
-                    />
+                    <CommentArea title="title" asin="12345" />
                 </CommentContextProvider>
             </ThemeContextProvider>
         )
@@ -30,39 +27,34 @@ describe('Test Comment Area', () => {
                 rate: 1,
                 _id: `111`,
                 author: 'autore',
-                asin: '12345'
+                asin: '12345',
             },
             {
                 comment: 'comment 2',
                 rate: 3,
                 _id: `222`,
                 author: 'autore',
-                asin: '12345'
+                asin: '12345',
             },
             {
                 comment: 'comment 3',
                 rate: 3,
                 _id: `333`,
                 author: 'autore',
-                asin: '12345'
-            }
+                asin: '12345',
+            },
         ]
 
         window.fetch = jest.fn(() =>
             Promise.resolve({
-                json: () => Promise.resolve(mockComments)
+                json: () => Promise.resolve(mockComments),
             })
-        );
+        )
 
         const { findAllByText } = render(
             <ThemeContextProvider value={mockDarkMode}>
-                <CommentContextProvider value={
-                    { comments: mockComments }
-                }>
-                    <CommentArea
-                        title='title'
-                        asin='12345'
-                    />
+                <CommentContextProvider value={{ comments: mockComments }}>
+                    <CommentArea title="title" asin="12345" />
                 </CommentContextProvider>
             </ThemeContextProvider>
         )
@@ -77,19 +69,14 @@ describe('Test Comment Area', () => {
 
         window.fetch = jest.fn(() =>
             Promise.resolve({
-                json: () => Promise.resolve(mockComments)
+                json: () => Promise.resolve(mockComments),
             })
-        );
+        )
 
         const { getByText } = render(
             <ThemeContextProvider value={mockDarkMode}>
-                <CommentContextProvider value={
-                    { comments: mockComments }
-                }>
-                    <CommentArea
-                        title='title'
-                        asin='12345'
-                    />
+                <CommentContextProvider value={{ comments: mockComments }}>
+                    <CommentArea title="title" asin="12345" />
                 </CommentContextProvider>
             </ThemeContextProvider>
         )
@@ -101,24 +88,17 @@ describe('Test Comment Area', () => {
     })
 
     it('should display error if an error occurred during fetch', async () => {
-        window.fetch = jest.fn(() =>
-            Promise.reject(new Error('Fetch failed'))
-        );
-        
+        window.fetch = jest.fn(() => Promise.reject(new Error('Fetch failed')))
+
         const { findByText } = render(
             <ThemeContextProvider value={mockDarkMode}>
-                <CommentContextProvider value={
-                    { isFetchFailed: true }
-                }>
-                    <CommentArea
-                        title='title'
-                        asin='12345'
-                    />
+                <CommentContextProvider value={{ isFetchFailed: true }}>
+                    <CommentArea title="title" asin="12345" />
                 </CommentContextProvider>
             </ThemeContextProvider>
         )
 
-         const errorMessage = await findByText('ERROR!')
+        const errorMessage = await findByText('ERROR!')
 
         expect(errorMessage).toBeInTheDocument()
     })

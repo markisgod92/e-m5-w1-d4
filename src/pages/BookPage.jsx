@@ -53,9 +53,7 @@ export const BookPage = () => {
                         )}
                     </Row>
                     <Row className="pb-5 mb-5">
-                        <CommentArea 
-                            asin={asin}
-                        />
+                        <CommentArea asin={asin} />
                     </Row>
                 </Container>
             </main>

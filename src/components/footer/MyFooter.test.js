@@ -5,7 +5,7 @@ import { MyFooter } from './MyFooter'
 
 describe('Test Footer', () => {
     it('should render correctly', () => {
-        const {getByText} = render(
+        const { getByText } = render(
             <ThemeContextProvider>
                 <MyFooter />
             </ThemeContextProvider>

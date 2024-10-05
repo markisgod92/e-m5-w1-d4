@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from "@testing-library/react"
+import { fireEvent, render } from '@testing-library/react'
 import { Welcome } from './Welcome'
 import { ThemeContextProvider } from '../../context/Theme'
 import { BookContextProvider } from '../../context/BookContext'
 
-const mockDarkMode = {isDarkModeOn: false}
+const mockDarkMode = { isDarkModeOn: false }
 
 describe('Test Welcome Component', () => {
     it('should display welcome message', () => {
@@ -42,7 +42,7 @@ describe('Test Welcome Component', () => {
 
     it('should display a button that shows an alert', () => {
         const buttonText = /Buy for/i
-        const {getByText} = render(
+        const { getByText } = render(
             <ThemeContextProvider value={mockDarkMode}>
                 <BookContextProvider>
                     <Welcome />
@@ -53,7 +53,9 @@ describe('Test Welcome Component', () => {
         const buttonElement = getByText(buttonText)
         expect(buttonElement).toBeInTheDocument()
 
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+        const alertMock = jest
+            .spyOn(window, 'alert')
+            .mockImplementation(() => {})
         fireEvent.click(buttonElement)
         expect(alertMock).toHaveBeenCalledTimes(1)
         alertMock.mockRestore()

@@ -7,12 +7,8 @@ import { ErrorDisplay } from '../../error/ErrorDisplay'
 import { CommentContext } from '../../../context/CommentContext'
 
 export const CommentArea = ({ title, asin }) => {
-    const {
-        comments,
-        isLoadingComments,
-        isFetchFailed,
-        getComments
-    } = useContext(CommentContext)
+    const { comments, isLoadingComments, isFetchFailed, getComments } =
+        useContext(CommentContext)
 
     useEffect(() => {
         getComments(asin)
@@ -36,10 +32,7 @@ export const CommentArea = ({ title, asin }) => {
                     </Col>
                 )}
                 {!isLoadingComments && !isFetchFailed && (
-                    <CommentList
-                        asin={asin}
-                        comments={comments}
-                    />
+                    <CommentList asin={asin} comments={comments} />
                 )}
             </Row>
         </>

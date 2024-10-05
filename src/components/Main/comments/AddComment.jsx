@@ -4,7 +4,7 @@ import ReactStars from 'react-rating-stars-component'
 import { CommentContext } from '../../../context/CommentContext'
 
 export const AddComment = ({ asin }) => {
-    const {getComments} = useContext(CommentContext)
+    const { getComments } = useContext(CommentContext)
 
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAxOTJiYTBmMzg1MDAwMTUxYzE3YzEiLCJpYXQiOjE3MjgxNTYzNDYsImV4cCI6MTcyOTM2NTk0Nn0.4qRgeoTdncpu6cktu9LRV1OwTrDtF5Ed0VSJ8-F98Zs'
@@ -27,7 +27,11 @@ export const AddComment = ({ asin }) => {
     }
 
     const validateComment = () => {
-        return userComment.comment && userComment.rate && userComment.elementId === asin
+        return (
+            userComment.comment &&
+            userComment.rate &&
+            userComment.elementId === asin
+        )
     }
 
     const postComment = async (e) => {
@@ -61,7 +65,7 @@ export const AddComment = ({ asin }) => {
     }
 
     useEffect(() => {
-        setStarsCount(prev => (prev + 1))
+        setStarsCount((prev) => prev + 1)
     }, [userComment.rate])
 
     return (

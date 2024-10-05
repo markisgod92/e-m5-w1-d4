@@ -1,10 +1,7 @@
 import { Col } from 'react-bootstrap'
 import { SingleComment } from './SingleComment'
 
-export const CommentList = ({
-    asin,
-    comments
-}) => {
+export const CommentList = ({ asin, comments }) => {
     return (
         <Col>
             <div className="d-flex flex-column overflow-scroll">

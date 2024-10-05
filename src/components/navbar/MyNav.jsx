@@ -17,7 +17,7 @@ export const MyNav = () => {
     const toggleDarkMode = (e) => {
         setDarkModeOn(e.target.checked)
     }
-    
+
     const navigate = useNavigate()
 
     return (
@@ -26,7 +26,10 @@ export const MyNav = () => {
             className={`sticky-top border-bottom border-3 border-success ${isDarkModeOn ? 'bg-dark text-white' : 'bg-white'}`}
         >
             <Container fluid>
-                <Link to='/' className='text-decoration-none text-success fw-bold pe-5'>
+                <Link
+                    to="/"
+                    className="text-decoration-none text-success fw-bold pe-5"
+                >
                     <h1>EpiBooks</h1>
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -43,19 +46,23 @@ export const MyNav = () => {
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
-                        <Button variant="success" onClick={() => {
-                            searchByName()
-                            // if not on home, open home and reset asin
-                            if (window.location.pathname !== '/') navigate('/')
-                        }}>
+                        <Button
+                            variant="success"
+                            onClick={() => {
+                                searchByName()
+                                // if not on home, open home and reset asin
+                                if (window.location.pathname !== '/')
+                                    navigate('/')
+                            }}
+                        >
                             Cerca
                         </Button>
                     </Form>
                     <Form.Switch
-                    className="ms-3 theme-switch"
-                    checked={isDarkModeOn}
-                    onChange={toggleDarkMode}
-                />
+                        className="ms-3 theme-switch"
+                        checked={isDarkModeOn}
+                        onChange={toggleDarkMode}
+                    />
                 </Navbar.Collapse>
             </Container>
         </Navbar>

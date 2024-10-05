@@ -80,7 +80,7 @@ export const CommentContextProvider = ({ children }) => {
                 modifyComment,
                 deleteComment,
                 isModifyFailed,
-                isDeleteFailed
+                isDeleteFailed,
             }}
         >
             {children}

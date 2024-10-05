@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 
 import fantasyBooks from '../assets/books/fantasy.json'
 import historyBooks from '../assets/books/history.json'
@@ -81,4 +81,8 @@ export const BookContextProvider = ({ children }) => {
             {children}
         </BookContext.Provider>
     )
+}
+
+export const useBookContext = () => {
+    return useContext(BookContext)
 }

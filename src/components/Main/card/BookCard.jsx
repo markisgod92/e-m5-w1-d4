@@ -9,9 +9,7 @@ export const BookCard = ({ title, img, price, category, asin }) => {
 
     return (
         <Col sm={3}>
-            <Card
-                className={`h-100 ${isDarkModeOn ? 'bg-dark-subtle' : ''}`}
-            >
+            <Card className={`h-100 ${isDarkModeOn ? 'bg-dark-subtle' : ''}`}>
                 <Card.Img
                     variant="top"
                     src={img}
