@@ -7,7 +7,7 @@ export const AddComment = ({ asin }) => {
     const {getComments} = useContext(CommentContext)
 
     const API_AUTHORIZATION =
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAxOTJiYTBmMzg1MDAwMTUxYzE3YzEiLCJpYXQiOjE3MjgxNTYzNDYsImV4cCI6MTcyOTM2NTk0Nn0.4qRgeoTdncpu6cktu9LRV1OwTrDtF5Ed0VSJ8-F98Zs'
 
     const defaultState = {
         comment: '',
@@ -53,7 +53,6 @@ export const AddComment = ({ asin }) => {
 
             if (response.ok) setFormAlert('Commento inviato.')
         } catch (e) {
-            console.error(e)
             setFormAlert(e)
         } finally {
             getComments(asin)

@@ -13,7 +13,7 @@ export const SingleComment = ({
     comment,
 }) => {
     const [isModifyOn, setIsModifyOn] = useState(false)
-    const {modifyComment, deleteComment} = useContext(CommentContext)
+    const {modifyComment, deleteComment, isModifyFailed, isDeleteFailed} = useContext(CommentContext)
 
     const originalComment = {
         comment: comment,
@@ -70,7 +70,10 @@ export const SingleComment = ({
                             value={userComment.comment}
                             onChange={(e) => handleInputChange(e)}
                         />
-                        <div className="d-flex justify-content-center gap-1">
+                        <div className="d-flex flex-wrap justify-content-center gap-1">
+                            {isModifyFailed && (
+                                <span className='w-100 text-center pb-3 text-danger'>Failed to modify comment. Try again.</span>
+                            )}
                             <Button
                                 variant="danger"
                                 onClick={() => {
@@ -104,6 +107,9 @@ export const SingleComment = ({
                         <Button variant="danger" onClick={() => deleteComment(id)}>
                             <i className="bi bi-trash"></i>
                         </Button>
+                        {isDeleteFailed && (
+                            <div className='delete-fail'>Error deleting comment. Try again.</div>
+                        )}
                     </div>
                 )}
             </div>

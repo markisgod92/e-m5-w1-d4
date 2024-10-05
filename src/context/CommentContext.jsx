@@ -6,9 +6,11 @@ export const CommentContextProvider = ({ children }) => {
     const [comments, setComments] = useState([])
     const [isLoadingComments, setIsLoadingComments] = useState(false)
     const [isFetchFailed, setIsFetchFailed] = useState(false)
+    const [isDeleteFailed, setDeleteFailed] = useState(false)
+    const [isModifyFailed, setModifyFailed] = useState(false)
 
     const API_AUTHORIZATION =
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVkM2RhMTI2YjJjOTAwMTU3Mjc2Y2IiLCJpYXQiOjE3MjY4MjM4NDEsImV4cCI6MTcyODAzMzQ0MX0.da4_KxsMRyEgFrkkjKlRREihw0tY6CLYmjShk4uSNz8'
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAxOTJiYTBmMzg1MDAwMTUxYzE3YzEiLCJpYXQiOjE3MjgxNTYzNDYsImV4cCI6MTcyOTM2NTk0Nn0.4qRgeoTdncpu6cktu9LRV1OwTrDtF5Ed0VSJ8-F98Zs'
 
     const getComments = async (asin) => {
         if (!asin) return
@@ -21,8 +23,7 @@ export const CommentContextProvider = ({ children }) => {
             )
             const data = await response.json()
             setComments(data)
-        } catch (e) {
-            console.error(e)
+        } catch (error) {
             setIsFetchFailed(true)
         } finally {
             setIsLoadingComments(false)
@@ -44,7 +45,7 @@ export const CommentContextProvider = ({ children }) => {
                 setComments(comments.filter((comment) => comment._id !== id))
             }
         } catch (e) {
-            console.error(e)
+            setDeleteFailed(true)
         }
     }
 
@@ -64,8 +65,8 @@ export const CommentContextProvider = ({ children }) => {
             if (response.ok) {
                 getComments(asin)
             }
-        } catch (e) {
-            console.error(e)
+        } catch (error) {
+            setModifyFailed(true)
         }
     }
 
@@ -78,6 +79,8 @@ export const CommentContextProvider = ({ children }) => {
                 getComments,
                 modifyComment,
                 deleteComment,
+                isModifyFailed,
+                isDeleteFailed
             }}
         >
             {children}
