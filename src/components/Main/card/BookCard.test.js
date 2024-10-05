@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { MemoryRouter} from 'react-router-dom'
 import { ThemeContextProvider } from '../../../context/Theme'
-import { fireEvent, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { BookCard } from './BookCard'
 
 const mockDarkMode = { isDarkModeOn: false }
@@ -10,7 +10,7 @@ describe('Test Book Card component', () => {
     it('should render card with passed props', () => {
         const { getByText, getByRole } = render(
             <MemoryRouter>
-                <ThemeContextProvider>
+                <ThemeContextProvider value={mockDarkMode}>
                     <BookCard 
                         title='Book Title'
                         img='https://picsum.photos/200/300'
