@@ -2,6 +2,7 @@ import { Col, Card, Button } from 'react-bootstrap'
 import { useContext } from 'react'
 import { ThemeContext } from '../../../context/Theme'
 import { useNavigate } from 'react-router-dom'
+import './bookcard.css'
 
 export const BookCard = ({ title, img, price, category, asin }) => {
     const { isDarkModeOn } = useContext(ThemeContext)
@@ -10,12 +11,14 @@ export const BookCard = ({ title, img, price, category, asin }) => {
     return (
         <Col sm={3}>
             <Card className={`h-100 ${isDarkModeOn ? 'bg-dark-subtle' : ''}`}>
+                <div className='p-2 bookcard-img'>
                 <Card.Img
                     variant="top"
                     src={img}
                     alt={title}
-                    className="p-2 w-100 h-100 img-fluid object-fit-cover"
                 />
+                </div>
+                
                 <Card.Body className="d-flex flex-column justify-content-between">
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{category}</Card.Text>
