@@ -71,6 +71,7 @@ export const BookContextProvider = ({ children }) => {
             value={{
                 allBooks,
                 books,
+                getBooks,
                 setBooks,
                 searchInput,
                 setSearchInput,

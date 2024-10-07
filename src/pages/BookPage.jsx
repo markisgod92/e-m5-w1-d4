@@ -10,7 +10,7 @@ export const BookPage = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
     const { asin } = useParams()
     const { books } = useContext(BookContext)
-    const [book, setBook] = useState(null)
+    const [book, setBook] = useState({})
 
     const getBookData = () => {
         const foundBook = books.find((book) => book.asin === asin)
@@ -19,7 +19,7 @@ export const BookPage = () => {
 
     useEffect(() => {
         getBookData()
-    }, [asin])
+    }, [book])
 
     return (
         <NavAndFooterProvider>
@@ -43,6 +43,7 @@ export const BookPage = () => {
                                             </p>
                                             <h2>{book.title}</h2>
                                             <p>Asin: {book.asin}</p>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, veniam! Quia, maxime iusto! Molestias voluptas ut nisi illo omnis ipsum ab, blanditiis dolores impedit vel laboriosam repellat, consectetur, architecto iusto aliquid eum delectus error doloribus. Nostrum, fugiat laboriosam commodi vero eveniet voluptas placeat odit ullam dicta itaque numquam, dolorem, vel pariatur perferendis rem. Soluta officia quidem beatae repellendus velit porro.</p>
                                         </div>
                                         <Button variant="success">
                                             Buy for {book.price} €

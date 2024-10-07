@@ -4,10 +4,10 @@ import { SingleComment } from './SingleComment'
 export const CommentList = ({ asin, comments }) => {
     return (
         <Col>
-            <div className="d-flex flex-column overflow-scroll">
+            <div className="d-flex flex-column">
                 <h4>Commenti</h4>
                 <hr className="w-100 mb-3" />
-                <div className="d-flex flex-column gap-3 pe-5">
+                <div className="d-flex flex-column gap-3">
                     {comments.length > 0
                         ? comments.map((comment, i) => (
                               <SingleComment

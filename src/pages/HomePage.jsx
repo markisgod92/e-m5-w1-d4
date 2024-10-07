@@ -3,10 +3,16 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { ThemeContext } from '../context/Theme'
 import { BooksContainer } from '../components/Main/BooksContainer'
 import { Welcome } from '../components/hero/Welcome'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+import { BookContext } from '../context/BookContext'
 
 export const HomePage = () => {
     const { isDarkModeOn } = useContext(ThemeContext)
+    const { getBooks } = useContext(BookContext)
+
+    useEffect(() => {
+        getBooks()
+    }, [])
 
     return (
         <NavAndFooterProvider>

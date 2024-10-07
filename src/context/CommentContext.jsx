@@ -6,8 +6,6 @@ export const CommentContextProvider = ({ children }) => {
     const [comments, setComments] = useState([])
     const [isLoadingComments, setIsLoadingComments] = useState(false)
     const [isFetchFailed, setIsFetchFailed] = useState(false)
-    const [isDeleteFailed, setDeleteFailed] = useState(false)
-    const [isModifyFailed, setModifyFailed] = useState(false)
 
     const API_AUTHORIZATION =
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAxOTJiYTBmMzg1MDAwMTUxYzE3YzEiLCJpYXQiOjE3MjgxNTYzNDYsImV4cCI6MTcyOTM2NTk0Nn0.4qRgeoTdncpu6cktu9LRV1OwTrDtF5Ed0VSJ8-F98Zs'
@@ -41,11 +39,12 @@ export const CommentContextProvider = ({ children }) => {
                     },
                 }
             )
-            if (response.ok) {
-                setComments(comments.filter((comment) => comment._id !== id))
+            if (!response.ok) {
+                throw new Error('Delete failed')
             }
+            setComments(comments.filter((comment) => comment._id !== id))
         } catch (e) {
-            setDeleteFailed(true)
+            throw error
         }
     }
 
@@ -62,11 +61,14 @@ export const CommentContextProvider = ({ children }) => {
                     body: JSON.stringify(modifiedComment),
                 }
             )
-            if (response.ok) {
-                getComments(asin)
+
+            if (!response.ok) {
+                throw new Error('Modify failed')
             }
+
+            getComments(asin)
         } catch (error) {
-            setModifyFailed(true)
+            throw error
         }
     }
 
@@ -79,8 +81,6 @@ export const CommentContextProvider = ({ children }) => {
                 getComments,
                 modifyComment,
                 deleteComment,
-                isModifyFailed,
-                isDeleteFailed,
             }}
         >
             {children}

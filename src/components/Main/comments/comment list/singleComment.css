@@ -2,16 +2,24 @@
     position: relative;
 }
 
+.comment-line {
+    word-wrap: break-word;
+}
+
 .action-btns {
     position: absolute;
     top: 25%;
-    right: -50%;
+    right: 0;
     content: '';
     width: 100%;
     height: 50%;
     opacity: 0;
     z-index: 2;
     transition: all 0.1s ease-in-out;
+}
+
+.action-btns button {
+    height: 40px;
 }
 
 .comment-div:hover .action-btns {
@@ -24,12 +32,8 @@
 }
 
 .delete-fail {
-    position: absolute;
-    top: 0;
-    right: 20%;
-    width: 50%;
-    height: 100%;
-    opacity: 1;
     font-size: 20px;
+    text-align: end;
     color: red;
+    font-weight: bold;
 }
